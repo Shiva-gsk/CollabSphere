@@ -8,7 +8,7 @@ import { Button } from "../../components/ui/button";
 import {
   Form,
   FormControl,
-  FormDescription,
+
   FormField,
   FormItem,
   FormLabel,
@@ -16,9 +16,8 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import CardWrapper from "@/components/auth/CardWrapper";
-import { cn } from "@/lib/utils";
 import { LoginSchema } from "@/schemas";
-import { startTransition, useState, useTransition } from "react";
+import { useState, useTransition } from "react";
 import FormError from "@/components/auth/form-error";
 import FormSuccess from "@/components/auth/form-success";
 import { login } from "@/actions/login";
@@ -37,7 +36,7 @@ export default function Login() {
   });
 
   const OnSubmit = (values : z.infer<typeof LoginSchema>) =>{
-    startTransition(() =>{
+    setTransition(() =>{
       login(values)
         .then((data) => {
           setError(data.error);
