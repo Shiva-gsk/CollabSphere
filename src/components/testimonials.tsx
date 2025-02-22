@@ -5,19 +5,19 @@ const testimonials = [
     name: "Alice Johnson",
     role: "Project Manager",
     content: "CollabSphere has revolutionized how our team collaborates. It's intuitive and powerful!",
-    avatar: "/placeholder.svg?height=40&width=40",
+    avatar: "",
   },
   {
     name: "Bob Smith",
     role: "Team Lead",
     content: "The scheduling features have made coordinating our global team so much easier.",
-    avatar: "/placeholder.svg?height=40&width=40",
+    avatar: "",
   },
   {
     name: "Carol Davis",
     role: "Marketing Director",
     content: "The insights sharing feature has greatly improved our knowledge management.",
-    avatar: "/placeholder.svg?height=40&width=40",
+    avatar: "",
   },
 ]
 

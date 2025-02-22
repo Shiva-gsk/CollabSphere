@@ -1,10 +1,17 @@
 
 import "./globals.css"
 import type { Metadata } from "next"
-import { Inter } from "next/font/google"
+import localFont from "next/font/local";
+
+const myFont = localFont({
+  src: "../../public/fonts/Inter-VariableFont_opsz,wght.ttf",
+  weight: "400",
+  style: "normal",
+});
+// import { Inter } from "next/font/google"
 import type React from "react" // Added import for React
 
-const inter = Inter({ subsets: ["latin"] })
+// const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
   title: "CollabSphere: The Ultimate Collaboration and Scheduling Platform",
@@ -19,7 +26,7 @@ export default async function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={myFont.className}>{children}</body>
     </html>
   )
 }
