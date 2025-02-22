@@ -1,3 +1,4 @@
+import { db } from "@/lib/db"
 import "./globals.css"
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
@@ -11,7 +12,7 @@ export const metadata: Metadata = {
     "CollabSphere is an intuitive collaboration platform designed for efficient institution control. Create public and private organizations, schedule tasks, meetings, and provide insights seamlessly with all contributors.",
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode
