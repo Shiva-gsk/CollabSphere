@@ -11,7 +11,7 @@ export const register = async (values: z.infer<typeof RegisterSchema>) => {
         return {error:"Invalid Fields "}
 
     }
-    const {email, password, name} = validatedFields.data;
+    const {email, password, name} = values;
     const hashedPassword = await bycrypt.hash(password, 10);
     const user = await db.user.findUnique({
         where:{
