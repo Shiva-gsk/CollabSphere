@@ -1,4 +1,5 @@
-import {auth} from "@/auth";
+import { auth } from "@/auth";
+
 
 const Settings = async () =>{
     const session = await auth();
@@ -6,6 +7,7 @@ const Settings = async () =>{
     return(
         <div>
             {JSON.stringify(session)}
+           
         </div>
     )
 }

@@ -2,7 +2,7 @@
 import "./globals.css"
 import type { Metadata } from "next"
 import localFont from "next/font/local";
-
+import SessionWrapper from "@/components/SessionWrapper"
 const myFont = localFont({
   src: "../../public/fonts/Inter-VariableFont_opsz,wght.ttf",
   weight: "400",
@@ -26,7 +26,10 @@ export default async function RootLayout({
 }) {
   return (
     <html lang="en">
+      <SessionWrapper>
       <body className={myFont.className}>{children}</body>
+
+      </SessionWrapper>
     </html>
   )
 }

@@ -1,13 +1,25 @@
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
+
+"use client";
+
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { useState } from "react";
+import { motion } from "framer-motion";
+import { Menu, X } from "lucide-react";
+import { useSession } from "next-auth/react"
 
 export default function Header() {
+  const [isOpen, setIsOpen] = useState(false);
+  const { data: session } = useSession()
   return (
-    <header className="py-4 px-6 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50 w-full border-b border-border/40">
-      <div className="container mx-auto flex-col md:flex-row flex justify-between items-center">
+    <header className="py-4 pb-0 md:pb-4 px-6 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-500 w-full border-b border-border/40 ">
+      <div className="container mx-auto flex justify-between items-center">
+        {/* Logo */}
         <Link href="/" className="text-2xl font-bold text-primary">
           CollabSphere
         </Link>
+
+        {/* Desktop Navigation */}
         <nav className="hidden md:flex space-x-4">
           <Link href="#features" className="text-muted-foreground hover:text-primary">
             Features
@@ -19,12 +31,67 @@ export default function Header() {
             Pricing
           </Link>
         </nav>
-        <div className=" space-x-2 flex pt-4 md:p-0">
-          <Link href="/login"><Button variant="ghost">Log In</Button></Link>
-          <Link href="/signup"><Button>Sign Up</Button></Link>
-        </div>
-      </div>
-    </header>
-  )
-}
 
+        {/* Auth Buttons (Desktop) */}
+        <div className="hidden md:flex space-x-2">
+          <Link href="/login">
+            <Button variant="ghost">Log In</Button>
+          </Link>
+          <Link href="/signup">
+            <Button>Sign Up</Button>
+          </Link>
+        </div>
+
+        {/* Hamburger Icon (Mobile) */}
+        <button 
+          className="md:hidden text-primary focus:outline-none"
+          onClick={() => setIsOpen(!isOpen)}
+        >
+          {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+        </button>
+      </div>
+
+      {/* Mobile Menu */}
+      <motion.div
+        initial={{ height: 0, opacity: 0 }}
+        animate={{ height: isOpen ? "100vh" : 0, opacity: isOpen ? 1 : 0 }}
+        transition={{ duration: 0.5 }}
+        className={`overflow-hidden md:hidden flex flex-col items-center space-y-4 bg-background px-6 py-4 z-10`}
+      >
+        <Link href="#features" className="text-muted-foreground hover:text-primary" onClick={() => setIsOpen(false)}>
+          Features
+        </Link>
+        <Link href="#how-it-works" className="text-muted-foreground hover:text-primary" onClick={() => setIsOpen(false)}>
+          How it Works
+        </Link>
+        <Link href="#pricing" className="text-muted-foreground hover:text-primary" onClick={() => setIsOpen(false)}>
+          Pricing
+        </Link>
+
+        {/* Auth Buttons (Mobile) */}
+        {session?<>
+          <Link href="/dashboard" className="w-full">
+            <Button variant="ghost" className="w-full">Dashboard</Button>
+          </Link>
+          <Link href="/logout" className="w-full">
+            <Button className="w-full">Log Out</Button>
+          </Link>
+          </>:<>
+          <Link href="/login" className="w-full">
+            <Button variant="ghost" className="w-full">Log In</Button>
+          </Link>
+          <Link href="/signup" className="w-full">
+            <Button className="w-full">Sign Up</Button>
+          </Link>
+          </>
+        }
+        {/* <Link href="/login" className="w-full">
+          <Button variant="ghost" className="w-full">Log In</Button>
+        </Link>
+        <Link href="/signup" className="w-full">
+          <Button className="w-full">Sign Up</Button>
+        </Link> */}
+      </motion.div>
+    </header>
+  );
+}
