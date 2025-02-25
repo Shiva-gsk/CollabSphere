@@ -14,19 +14,23 @@ import Credentials from "next-auth/providers/credentials"
 // })
 
 
-// import GitHub from "next-auth/providers/github"
+import GitHub from "next-auth/providers/github"
+import Google from "next-auth/providers/google"
 // import authConfig from "./auth.config"
 import bcrypt from "bcryptjs";
 import { LoginSchema } from "./schemas";
 
 // import type { NextAuthConfig } from "next-auth";
 import { getUserByEmail } from "./data/user";
+
  
 export const { handlers, signIn, signOut, auth } = NextAuth({
   adapter: PrismaAdapter(db),
   session: {strategy: "jwt"},
   // providers: [GitHub],
-  providers:[Credentials({
+  providers:[GitHub,
+    Google,
+    Credentials({
           async authorize(credentials){
               const valid = await LoginSchema.safeParse(credentials);
               if(valid.success){

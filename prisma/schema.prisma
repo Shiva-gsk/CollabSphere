@@ -17,17 +17,35 @@ datasource db {
 }
 
 model User {
-  id            String          @id @default(cuid())
+  id            String       @id @default(cuid())
   name          String?
-  email         String?          @unique
+  email         String?      @unique
   emailVerified DateTime?
   image         String?
-  password         String?
+  password      String?
   accounts      Account[]
-  // Optional for WebAuthn support
- 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+
+  // Explicit many-to-many relation with Team
+  teams         TeamUser[]
+
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model Team {
+  id      String     @id @default(cuid())
+  name    String
+  users   TeamUser[]
+}
+
+model TeamUser {
+  userId String
+  teamId String
+
+  user   User @relation(fields: [userId], references: [id])
+  team   Team @relation(fields: [teamId], references: [id])
+
+  @@id([userId, teamId]) // Composite primary key to prevent duplicate entries
 }
 
 model Account {
