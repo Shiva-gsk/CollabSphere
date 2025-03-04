@@ -3,12 +3,34 @@
 
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { useSession } from "next-auth/react"
 
 export default function Header() {
+  const headerRef = useRef<HTMLDivElement>(null);
+  const navRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) =>{
+      if (headerRef.current &&
+        navRef.current &&
+        event.target instanceof Node &&
+        (!headerRef.current.contains(event.target) &&
+        !navRef.current.contains(event.target))){
+        // setIsOpen(false);
+        console.log(!headerRef.current.contains(event.target));
+        console.log(!navRef.current.contains(event.target));
+        console.log("clicked outside");
+      }
+    }
+    document.addEventListener("click", handleClickOutside);
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    }
+  }, [])
+  
   const [isOpen, setIsOpen] = useState(false);
   const { data: session } = useSession()
   return (
@@ -44,6 +66,7 @@ export default function Header() {
 
         {/* Hamburger Icon (Mobile) */}
         <button 
+          ref={navRef}
           className="md:hidden text-primary focus:outline-none"
           onClick={() => setIsOpen(!isOpen)}
         >
@@ -54,10 +77,11 @@ export default function Header() {
       {/* Mobile Menu */}
       <motion.div
         initial={{ height: 0, opacity: 0 }}
-        animate={{ height: isOpen ? "100vh" : 0, opacity: isOpen ? 1 : 0 }}
-        transition={{ duration: 0.5 }}
-        className={`overflow-hidden md:hidden flex flex-col items-center space-y-4 bg-background px-6 py-4 z-10`}
+        animate={{ height: isOpen? "40vh": "0px", opacity: isOpen ? 1 : 0 }}
+        transition={{ duration: 0.75 }}
+        className={`overflow md:hidden flex flex-col items-center space-y-4 bg-background px-6 py-4 z-100`}
       >
+        <div className="flex flex-col items-center space-y-4" ref={headerRef}>
         <Link href="#features" className="text-muted-foreground hover:text-primary" onClick={() => setIsOpen(false)}>
           Features
         </Link>
@@ -67,7 +91,6 @@ export default function Header() {
         <Link href="#pricing" className="text-muted-foreground hover:text-primary" onClick={() => setIsOpen(false)}>
           Pricing
         </Link>
-
         {/* Auth Buttons (Mobile) */}
         {session?<>
           <Link href="/dashboard" className="w-full">
@@ -85,6 +108,9 @@ export default function Header() {
           </Link>
           </>
         }
+        </div>
+        
+
         {/* <Link href="/login" className="w-full">
           <Button variant="ghost" className="w-full">Log In</Button>
         </Link>

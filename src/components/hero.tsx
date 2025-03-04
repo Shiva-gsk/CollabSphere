@@ -16,7 +16,7 @@ export default function Hero() {
     
   });
   return (
-    <section className="py-20 px-6 text-center bg-gradient-to-r from-primary/10 via-primary/5 to-background">
+    <section className="py-20 px-6 text-center bg-gradient-to-r from-primary/10 via-primary/5 to-background -z-10">
       <div className="container mx-auto max-w-3xl">
         <h1 className="text-4xl md:text-6xl font-bold mb-6">
           Collaborate and Schedule with Ease
