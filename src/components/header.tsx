@@ -78,7 +78,7 @@ export default function Header() {
       <motion.div
         initial={{ height: 0, opacity: 0 }}
         animate={{ height: isOpen? "40vh": "0px", opacity: isOpen ? 1 : 0 }}
-        transition={{ duration: 0.75 }}
+        transition={{ duration: 0.5 }}
         className={`overflow md:hidden flex flex-col items-center space-y-4 bg-background px-6 py-4 z-100`}
       >
         <div className="flex flex-col items-center space-y-4" ref={headerRef}>

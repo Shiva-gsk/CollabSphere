@@ -24,7 +24,7 @@ const CardWrapper = ({children, headerLabel, backButtonLabel, backButtonLink, sh
         <CardContent>
             {children}
         </CardContent>
-        {showSocial && <CardFooter className=''><Social/></CardFooter>}
+        {showSocial && <CardFooter className='w-full'><Social/></CardFooter>}
         <CardFooter >
             <Button variant="link"><Link href={backButtonLink}>{backButtonLabel}</Link></Button>
         </CardFooter>

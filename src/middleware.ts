@@ -16,11 +16,12 @@ export default middleware((req) =>{
   }
   if(isAuth){
     if(isLoggedIn){
+      console.log("is logged in");
       return Response.redirect(new URL(DEFAULT_LOGIN_REDIRECT, nextUrl));
     }
     return undefined;
   }
-
+  // console.log("is public", isPublic);
   if(!isPublic && !isLoggedIn){
     return Response.redirect(new URL("/login", nextUrl));
   }

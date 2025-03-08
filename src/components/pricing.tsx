@@ -49,7 +49,7 @@ export default function Pricing() {
         },
         opacity: 1,
         duration: 1,
-        repeat: 0,
+        ease: "power3.inOut",
       });
       
     
