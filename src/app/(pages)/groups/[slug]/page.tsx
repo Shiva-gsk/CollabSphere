@@ -1,7 +1,7 @@
 
 import React from 'react'
 
-const page = async ({
+const Page = async ({
     params,
   }: {
     params: Promise<{ slug: string }>
@@ -12,4 +12,4 @@ const page = async ({
 
 }
 
-export default page
+export default Page
