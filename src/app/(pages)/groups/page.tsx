@@ -6,7 +6,6 @@ import GroupCard from '@/components/GroupCard'
 import { useSession } from 'next-auth/react'
 
 export default function Page(){
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   const {data:session} = useSession();
   const inputRef = useRef(null);
   const [groups, setGroups] = useState([]);
@@ -28,7 +27,7 @@ export default function Page(){
         .catch((error) => console.error(error));
       });
     }
-  }, [session?.user?.email]);
+  }, [session?.user, session?.user?.email]);
 
   return (
     <section className='relative w-full h-full flex flex-col items-center justify-center'>

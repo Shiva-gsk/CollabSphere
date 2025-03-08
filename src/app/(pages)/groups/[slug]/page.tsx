@@ -7,7 +7,6 @@ const Page = async ({
     params: Promise<{ slug: string }>
   }) => {
     const { slug } = await params;
-    // eslint-disable-next-line react-hooks/rules-of-hooks
   return <div>My Post: {slug}</div>
 
 }
