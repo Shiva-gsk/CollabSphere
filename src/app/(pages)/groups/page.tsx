@@ -1,11 +1,11 @@
 "use client"
-import React, { useState, useEffect, useRef, useTransition, Suspense } from 'react'
+import React, { useState, useEffect, useRef, useTransition } from 'react'
 import { Input } from '@/components/ui/input'
 import { Search } from 'lucide-react'
 import GroupCard from '@/components/GroupCard'
 import { useSession } from 'next-auth/react'
 
-export default function page(){
+export default function Page(){
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const {data:session} = useSession();
   const inputRef = useRef(null);
@@ -15,7 +15,7 @@ export default function page(){
   useEffect(() => {
     if (session?.user?.email) {
       startTransition(() => {
-      fetch(`/api/groups?email=${session.user.email}`)
+      fetch(`/api/groups?email=${(session.user)?session.user.email:""}`)
         .then((res) => res.json())
         .then((data) => {console.log(data)
           if (data.error) {

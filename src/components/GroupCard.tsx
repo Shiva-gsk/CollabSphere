@@ -16,7 +16,7 @@ const GroupCard = ({children, groupName, groupOrganiser, groupLink,}:CardWrapper
   return (
     <Card className={cn("w-full flex flex-col justify-center items-center p-2 ")}>
         <CardHeader>
-            <CardTitle><div className={cn("")}>{groupName}</div></CardTitle>
+            <CardTitle><div className={cn("")}>{groupName}{groupOrganiser}</div></CardTitle>
         </CardHeader>
         <CardContent>
             {children}
