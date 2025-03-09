@@ -19,6 +19,10 @@ export const fetchGroups = async (email: string) => {
             const serializedData = JSON.parse(JSON.stringify(groups));
             return {data: serializedData};
         } catch (error) {
-            return {error: error.message};
+            if (error instanceof Error) {
+                return {error: error.message};
+            } else {
+                return {error: "An unknown error occurred"};
+            }
         }
 };

@@ -7,8 +7,16 @@ import { useSession } from 'next-auth/react'
 
 export default function Page(){
   const {data:session} = useSession();
-  const inputRef = useRef(null);
-  const [groups, setGroups] = useState([]);
+  const inputRef = useRef<HTMLInputElement>(null);
+  
+  interface Group {
+    id: string;
+    name: string;
+    organiser: string;
+    description: string;
+  }
+
+  const [groups, setGroups] = useState<Group[]>([]);
   const [isPending, startTransition] = useTransition();
   
   useEffect(() => {
