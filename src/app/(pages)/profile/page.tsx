@@ -10,7 +10,7 @@ export default function page() {
   return (
     <section className="w-full">
       <div className="flex w-[100%] items-center justify-center">
-        <AvatarLogo imageUrl={session?.user?.image}/>
+        <AvatarLogo imageUrl={session?.user?.image || ""}/>
       </div>
       <div className="mt-7 flex w-[100%] items-center justify-center text-2xl">
       {session?.user?.name}
