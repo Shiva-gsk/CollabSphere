@@ -1,4 +1,3 @@
-
 "use client";
 
 import Link from "next/link";
@@ -44,13 +43,35 @@ export default function Header() {
         {/* Desktop Navigation */}
         <nav className="hidden md:flex space-x-4">
           <Link href="#features" className="text-muted-foreground hover:text-primary">
+          <button onClick={()=>{
+            const ele= document.getElementById("features");
+            if(ele) {
+              ele.scrollIntoView({behavior: "smooth", block: "start"});
+            };
+  }}>
             Features
+
+          </button>
           </Link>
           <Link href="#how-it-works" className="text-muted-foreground hover:text-primary">
+          <button onClick={()=>{
+            const ele= document.getElementById("how-it-works");
+            if(ele) {
+              ele.scrollIntoView({behavior: "smooth", block: "start"});
+            };
+          }}>
             How it Works
+          </button>
           </Link>
           <Link href="#pricing" className="text-muted-foreground hover:text-primary">
+          <button onClick={()=>{
+            const ele= document.getElementById("pricing");
+            if(ele) {
+              ele.scrollIntoView({behavior: "smooth", block: "start"});
+            };
+  }}>
             Pricing
+            </button>
           </Link>
         </nav>
 
