@@ -114,5 +114,8 @@
   }
 }
 
+html {
+  scroll-behavior: smooth;
+}
 
 
